@@ -7,7 +7,7 @@ import {
   RefreshIcon,
   Tick02Icon,
 } from '@hugeicons/core-free-icons'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useShallow } from 'zustand/react/shallow'
 import { originLabel } from '@shared/browser'
 import { LOCALES, LOCALE_NAMES, type LanguageSetting } from '@shared/locale'
@@ -260,6 +260,12 @@ type ColorMode = SettingsFile['appearance']['theme']
 
 const COLOR_MODES: readonly ColorMode[] = ['system', 'light', 'dark']
 
+const TEXT_SAMPLE_PX = {
+  small: { composer: 14, reply: 13 },
+  default: { composer: 15, reply: 14 },
+  large: { composer: 16, reply: 15 },
+} as const
+
 /** The color mode, at the end of the Theme group's label, where search finds it as its own row. */
 export function ColorMode() {
   const { t } = useTranslation('settings')
@@ -348,10 +354,11 @@ export function Zoom() {
   )
 }
 
-/** The row draws its own line, then a paragraph of the thread at the chosen size under it. */
+/** The row draws its own line, then labelled composer and reply samples at the chosen sizes. */
 export function TextSize({ label }: { label: ReactNode }) {
   const { t } = useTranslation('settings')
   const value = useSettings().appearance.textSize
+  const sample = TEXT_SAMPLE_PX[value]
   const [apply, error] = useApply()
   return (
     <>
@@ -369,14 +376,25 @@ export function TextSize({ label }: { label: ReactNode }) {
           onChange={(v) => apply({ appearance: { textSize: v } })}
         />
       </div>
-      {/* The thread's own prose rules, its inline code included. */}
-      <p aria-hidden className="markdown k-inset text-prose">
-        <Trans
-          t={t}
-          i18nKey="appearance.textSize.previewAgent"
-          components={{ code: <code data-streamdown="inline-code" /> }}
-        />
-      </p>
+      <div aria-hidden className="k-inset k-type-preview">
+        <div className="k-type-preview__head">
+          <span className="k-type-preview__title">{t('appearance.textSize.preview')}</span>
+          <span>{t(`appearance.textSize.${value}`)}</span>
+        </div>
+        <div className="k-type-preview__row">
+          <span className="k-type-preview__role">
+            {t('appearance.textSize.previewComposerLabel', { size: sample.composer })}
+          </span>
+          <p className="k-type-preview__composer">{t('appearance.textSize.previewComposer')}</p>
+        </div>
+        <div className="k-type-preview__row">
+          <span className="k-type-preview__role">
+            {t('appearance.textSize.previewReplyLabel', { size: sample.reply })}
+          </span>
+          {/* The thread's own prose rules, so the reply sample matches what it describes. */}
+          <p className="markdown k-type-preview__reply">{t('appearance.textSize.previewReply')}</p>
+        </div>
+      </div>
     </>
   )
 }

@@ -217,7 +217,11 @@
       "small": "小",
       "default": "默认",
       "large": "大",
-      "previewAgent": "好的。我先读一下 <code>settings-page.tsx</code> 和设计文档，再逐页给出方案。"
+      "preview": "字号预览",
+      "previewComposerLabel": "输入框 · {{size}} px",
+      "previewComposer": "设置更改会立即生效。Aa 123",
+      "previewReplyLabel": "回复 · {{size}} px",
+      "previewReply": "回复会使用略小的字号。Aa 123"
     },
     "reduceMotion": {
       "name": "减弱动态效果",

@@ -2849,8 +2849,53 @@ li[data-row-exit='dust'] > * {
   line-height: 20px;
   color: var(--text);
 }
-/* Text size's preview: the thread's prose, which the inset's type would otherwise fix at 13 px. */
-:is(.kettu-settings, .kettu-sd) .k-inset.markdown {
+/* Text size's preview: labels stay in the interface type while the two samples follow the type
+   they describe, so the control cannot read as a real conversation. */
+:is(.kettu-settings, .kettu-sd) .k-inset.k-type-preview {
+  display: grid;
+  gap: 7px;
+  padding-block: 11px 12px;
+}
+:is(.kettu-settings, .kettu-sd) .k-type-preview__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 1px;
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  line-height: 14px;
+  color: var(--muted);
+}
+:is(.kettu-settings, .kettu-sd) .k-type-preview__title {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+:is(.kettu-settings, .kettu-sd) .k-type-preview__row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+}
+:is(.kettu-settings, .kettu-sd) .k-type-preview__role {
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  line-height: 16px;
+  color: var(--muted);
+}
+:is(.kettu-settings, .kettu-sd) .k-type-preview__composer,
+:is(.kettu-settings, .kettu-sd) .k-type-preview__reply {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+}
+:is(.kettu-settings, .kettu-sd) .k-type-preview__composer {
+  font-family: var(--font-sans);
+  font-size: var(--prose-size);
+  line-height: 1.55;
+}
+:is(.kettu-settings, .kettu-sd) .k-type-preview__reply.markdown {
   font-size: calc(var(--thread-prose-size) * var(--prose-scale));
   line-height: var(--text-prose--line-height);
 }

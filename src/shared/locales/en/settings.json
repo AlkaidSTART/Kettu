@@ -218,7 +218,11 @@
       "small": "Small",
       "default": "Default",
       "large": "Large",
-      "previewAgent": "Sure. I’ll read <code>settings-page.tsx</code> and the design doc first, then go page by page."
+      "preview": "Text size preview",
+      "previewComposerLabel": "Composer · {{size}} px",
+      "previewComposer": "Changes apply immediately. Aa 123",
+      "previewReplyLabel": "Reply · {{size}} px",
+      "previewReply": "Replies use a slightly smaller size. Aa 123"
     },
     "reduceMotion": {
       "name": "Reduce motion",
